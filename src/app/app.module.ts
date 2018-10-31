@@ -11,7 +11,17 @@ import { CoursesComponent } from './courses/courses.component';
 import { ResumePipe } from './resume.pipe';
 import { VoteComponent } from './vote/vote.component';
 import { PanelComponent } from './panel/panel.component';
-import { FavComponent } from './fav/fav.component'
+import { FavComponent } from './fav/fav.component';
+
+import { RouterModule, Routes} from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+const myRoutes: Routes = [
+  { path: "", redirectTo: "/courses", pathMatch: "full" },
+  { path: "courses", component: CoursesComponent },
+  { path: "posts", component: PostsComponent },
+  { path: "**", component: PageNotFoundComponent }
+]
 
 @NgModule({
   declarations: [
@@ -21,12 +31,14 @@ import { FavComponent } from './fav/fav.component'
     ResumePipe,
     VoteComponent,
     PanelComponent,
-    FavComponent
+    FavComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(myRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

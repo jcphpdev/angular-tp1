@@ -31,6 +31,14 @@
         </div>
 
         <div class="form-group">
+          <label for="category">Category</label>
+          <select [(ngModel)]="post.category" class="form-control" name="category" id="category">
+            <option></option>
+            <option [ngValue]="category" *ngFor="let category of categories">{{ category.label }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label for="body">Body</label>
           <textarea required #myBody="ngModel" [(ngModel)]="post.body" type="text" class="form-control" name="body" id="body"
             cols="30" rows="3"></textarea>
@@ -41,6 +49,8 @@
           </div>
 
         </div>
+
+        {{ post | json }}
 
         <button [disabled]="f.invalid" *ngIf="!onUpdatePost" class="btn btn-primary btn-block" (click)="persistePost(f)">Add
         </button>

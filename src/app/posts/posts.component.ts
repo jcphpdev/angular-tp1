@@ -14,10 +14,22 @@ import Swal from 'sweetalert2'
 })
 export class PostsComponent implements OnInit {
 
+  categories = [
+    {
+      id: 1, label: 'IT'
+    },
+    {
+      id: 2, label: 'Web'
+    },
+    {
+      id: 3, label: 'Mobile'
+    }
+  ];
   posts = [];
   post = {
     title: "",
-    body: ""
+    body: "",
+    category: ""
   }
   onAddPost: boolean = false;
   onUpdatePost: boolean = false;
