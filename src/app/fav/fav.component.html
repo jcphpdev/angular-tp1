@@ -1,0 +1,4 @@
+<i class="fa" aria-hidden="true" (click)="setFavorite()"
+    [ngClass]="{'fa-star-o': !favorite, 'fa-star': favorite}"
+    [ngStyle]="{color: favorite ? 'red' : 'blue', fontSize: favorite ? '20px' : '30px'}"
+    ></i>

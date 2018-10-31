@@ -1,0 +1,87 @@
+<div class="row mt-2">
+  <div class="col-md-6">
+    <h1>List of Posts</h1>
+  </div>
+  <div class="col-md-6 text-right">
+    <button class="btn btn-success btn-sm" (click)="showForm()">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-8 mx-auto">
+    <div *ngIf="onAddPost">
+      <form #f="ngForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input required minlength="3" maxlength="10" pattern="[a-zA-Z ]*" #myTitle="ngModel" [(ngModel)]="post.title"
+            type="text" class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="">
+          <div class="alert alert-danger" *ngIf="myTitle.touched && myTitle.invalid">
+            <div *ngIf="myTitle.errors.required">
+              This field is required!
+            </div>
+            <div *ngIf="myTitle.errors.minlength">
+              This field should be great than 3 characters!
+            </div>
+            <div *ngIf="myTitle.errors.pattern">
+              This field don't respect our pattern!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="body">Body</label>
+          <textarea required #myBody="ngModel" [(ngModel)]="post.body" type="text" class="form-control" name="body" id="body"
+            cols="30" rows="3"></textarea>
+          <div class="alert alert-danger" *ngIf="myBody.touched && myBody.invalid">
+            <div *ngIf="myBody.errors.required">
+              This field is required!
+            </div>
+          </div>
+
+        </div>
+
+        <button [disabled]="f.invalid" *ngIf="!onUpdatePost" class="btn btn-primary btn-block" (click)="persistePost(f)">Add
+        </button>
+
+        <button [disabled]="f.invalid" *ngIf="onUpdatePost" class="btn btn-warning btn-block" (click)="updatePost(f)">Update
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+  <table class="table table-hover mt-5">
+    <thead>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Description</th>
+
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts; index as i, odd as o, even as e, first as f, last as l" [class.table-success]="f"
+        [ngClass]="{'table-danger': l, 'table-info': e}">
+        <td>
+
+        </td>
+        <td>{{post.title}}</td>
+        <td>{{post.body}}</td>
+        <td class="text-right" nowrap>
+          <button class="btn btn-warning btn-sm mr-1" (click)=editPost(post)>
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button class="btn btn-danger btn-sm mr-1" (click)="deletePost(i,post.id)">
+            <i class="fa fa-trash"></i>
+          </button>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+</div>

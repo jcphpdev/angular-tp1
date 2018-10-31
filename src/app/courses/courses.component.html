@@ -1,0 +1,33 @@
+<div class="row mt-3">
+<div class="col-md-4" *ngFor="let course of courses">
+   
+    <app-panel>
+        <img class="card-img-top" [src]="course.image" [alt]="course.label">
+        <h4 class="title">{{course.label | uppercase }} </h4>
+        <div class="body">
+            
+            <p class="card-text">{{course.description | resume: 5}}</p>
+            <em>{{course.date | date: 'dd/mm/yy mm:hh'}}</em>
+            <button class="btn btn-primary btn-block">Buy {{course.price | currency:'EUR'}}</button>      
+            
+            {{course.votes.like}}        {{course.votes.dislike}}
+
+            <app-vote 
+                [like]= "course.votes.like" 
+                [dislike]= "course.votes.dislike"
+                (updateVotes)="setVoteInCourse($event, course)"
+                >
+            </app-vote>
+
+            
+
+            <i class="fa" aria-hidden="true" (click)="favorit(course)"
+                [ngClass]="{'fa-star-o': !course.fav, 'fa-star': course.fav}"
+                [ngStyle]="{color: course.fav ? 'red' : 'blue', fontSize: course.fav ? '20px' : '30px'}"
+                ></i>
+
+
+        </div>
+    </app-panel>
+</div>
+</div>

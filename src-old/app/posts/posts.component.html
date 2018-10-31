@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1>List of posts</h1>
+  </div>
+  <div class="col-md-6 text-right">
+    <button class="btn btn-success" (click)="showForm()">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="onAddPost">
+
+  <div class="form-group">
+    <label for="">Tilte</label>
+    <input [(ngModel)]="post.title" type="text" name="title" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="body">Body</label>
+    <textarea [(ngModel)]="post.body" name="body" class="form-control" cols="30" rows="3"></textarea>
+  </div>
+
+  <button class="btn btn-primary btn-block" (click)="persistPost()">
+    <i class="fa fa-paper-plane"></i> Send
+  </button>
+
+  <button class="btn btn-warning btn-block">
+    <i class="fa fa-paper-plane"></i> Send
+  </button>
+
+  {{ post | json }}
+
+</div>
+
+<table class="table table-hover table-bordered mt-5">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts">
+      <td scope="row">{{ post.id }}</td>
+      <td>{{ post.title }}</td>
+      <td>{{ post.body }}</td>
+      <td nowrap>
+        <button class="btn btn-warning btn-sm mr-1" (click)="editPost(post)">
+          <div class="fa fa-pencil"></div>
+        </button>
+        <button class="btn btn-danger btn-sm">
+          <div class="fa fa-trash"></div>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
